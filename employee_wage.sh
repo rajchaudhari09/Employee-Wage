@@ -1,26 +1,33 @@
 #!/bin/bash -x
 
-partTime=1
-fullTime=2
-totalSalary=0
-employeeRatePerHours=20
-numWorkingDays=20
+# CONSTANT FOR THE PROGRAM
+PART_TIME=1
+FULL_TIME=2
+MAXIMUM_HOURS_IN_MONTH=10
+EMPLOYEE_RATE_PER_HOURS=20
+NUM_WORKING_DAYS=20
 
-for (( day=1; day<=$numWorkingDays; day++ ))
+#VARIABLES
+totalEmployeeHours=0
+totalWorkingDays=0
+
+
+while [[ $totalEmployeeHours -lt $MAXIMUM_HOURS_IN_MONTH && $totalWorkingDays -lt $NUM_WORKING_DAYS ]]
 do
+	((totalWorkingDays++))
 	empCheck=$((RANDOM%3))
 		case $empCheck in
-			$fullTime)
+			$FULL_TIME)
 				employeeHours=8
 				;;
-			$partTime)
+			$PART_TIME)
 				employeeHours=4
 				;;
 			*)
 				employeeHours=0
 				;;
 		esac
-
-		salary=$(($employeeHours*$employeeRatePerHours))
-		totalSalary=$(($totalSalary+$salary))
+		totalEmployeeHours=$(($totalEmployeeHours*$employeeHours))
 done
+totalSalary=$(($totalEmployeeHours+$EMPLOYEE_RATE_PER_HOURS))
+
